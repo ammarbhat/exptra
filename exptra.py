@@ -170,10 +170,9 @@ def print_categories():
     )
 
 
-Tracker.print_main_menu()
 
 while True:
-    print()
+    Tracker.print_main_menu()
     action = int(input("What is your preffered action?: "))
     if action == 6:
         break
@@ -198,6 +197,10 @@ while True:
         }
 
         print("Select an account")
+        if len(Tracker.data) == 0:
+            print("No accounts found")
+            print()
+            continue
         for i, ac in enumerate(Tracker.data, start=1):
             print(f"{i}) {ac.title()}")
             print()
@@ -212,7 +215,12 @@ while True:
             elif act == 2:
 
                 print("Add transaction:")
-                date = input("Date of transaction(dd-mm-yyy): ").strip()
+                try:
+                    date = input("Date of transaction(dd-mm-yyy): ").strip()
+                    datetime.strptime(date, "%d-%m-%Y")
+                except:
+                    print("Invalid date format")
+                    continue
                 amount = float(input("Amount transferred($): ").strip())
                 description = input("Description: ")
                 x = input("Is this income or expense (i/e): ").strip().lower()
@@ -235,7 +243,12 @@ while True:
                         "Enter the serial no of the transaction you would like to edit:"
                     )
                 )
-                date = input("Date of transaction(dd-mm-yyy): ").strip()
+                try:
+                    date = input("Date of transaction(dd-mm-yyy): ").strip()
+                    datetime.strptime(date, "%d-%m-%Y")
+                except:
+                    print("Invalid date format")
+                    continue
                 amount = float(input("Enter the edited amount: "))
                 description = input("Enter the edited description: ")
                 x = input("Income or expense (i/e): ").strip().lower()
@@ -321,6 +334,11 @@ while True:
         elif confirmation == "y":
             name = Tracker(name)
             print("Account created succesfully.")
+            Tracker.save()
+            Tracker.load()
+            for name in Tracker.data.keys():
+             accounts[name] = Tracker(name)
+
     elif action == 4:
         if len(accounts) <= 1:
             print("More than one account needed to transfer between accounts.")
@@ -331,7 +349,12 @@ while True:
                 print()
             acc1 = input("Transfer from (enter account name): ").lower().strip()
             acc2 = input("Transfer to (enter account name): ").lower().strip()
-            date = input("Date of transaction(dd-mm-yyy): ").strip()
+            try:
+                date = input("Date of transaction(dd-mm-yyy): ").strip()
+                datetime.strptime(date, "%d-%m-%Y")
+            except:
+                print("Invalid date format")
+                continue
             amount = float(input("Enter the edited amount: "))
             description = input("Enter the edited description: ")
             try:
