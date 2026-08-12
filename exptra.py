@@ -216,7 +216,7 @@ while True:
 
                 print("Add transaction:")
                 try:
-                    date = input("Date of transaction(dd-mm-yyy): ").strip()
+                    date = input("Date of transaction(dd-mm-yyyy): ").strip()
                     datetime.strptime(date, "%d-%m-%Y")
                 except:
                     print("Invalid date format")
@@ -244,7 +244,7 @@ while True:
                     )
                 )
                 try:
-                    date = input("Date of transaction(dd-mm-yyy): ").strip()
+                    date = input("Date of transaction(dd-mm-yyyy): ").strip()
                     datetime.strptime(date, "%d-%m-%Y")
                 except:
                     print("Invalid date format")
@@ -350,7 +350,7 @@ while True:
             acc1 = input("Transfer from (enter account name): ").lower().strip()
             acc2 = input("Transfer to (enter account name): ").lower().strip()
             try:
-                date = input("Date of transaction(dd-mm-yyy): ").strip()
+                date = input("Date of transaction(dd-mm-yyyy): ").strip()
                 datetime.strptime(date, "%d-%m-%Y")
             except:
                 print("Invalid date format")
