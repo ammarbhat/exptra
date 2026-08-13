@@ -127,23 +127,16 @@ class Tracker:
     @staticmethod
     def print_main_menu():
         print("=== Expense Tracker ===")
-        print("1) View accounts / balances")
-        print("2) Select an account")
-        print("3) Create new account")
-        print("4) Transfer between accounts")
-        print("5) View all transactions")
-        print("6) Save & Exit")
+        print("1) View accounts / balances  2) Select an account")
+        print("3) Create new account        4) Transfer between accounts")
+        print("5) View all transactions     6) Save & Exit")
 
     def print_account_menu(self):
         print(f"=== Account: {self.name} | Balance: ${self.balance:.2f} ===")
-        print("1) View transactions")
-        print("2) Add transaction")
-        print("3) Edit transaction")
-        print("4) Delete transaction")
-        print("5) View by category")
-        print("6) Set/update budget")
-        print("7) View budget")
-        print("8) Back to main menu")
+        print("1) View transactions    2) Add transaction")
+        print("3) Edit transaction     4) Delete transaction")
+        print("5) View by category     6) Set/update budget")
+        print("7) View budget          8) Back to main menu")
 
 
 Tracker.load()
@@ -326,6 +319,9 @@ while True:
     elif action == 3:
         print("Create new account: ")
         name = input("Name: ")
+        if name in Tracker.data:
+            print("Account already exists, use a different name.")
+            continue
         confirmation = input(
             f"Are you sure that you would like to create an account named {name}?(y/n):"
         )
