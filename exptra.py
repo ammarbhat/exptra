@@ -1,6 +1,13 @@
 from datetime import datetime
 import json
+import time
 
+
+def type_print(text, delay=0.01):
+    for char in text:
+        print(char, end="", flush=True)
+        time.sleep(delay)
+    print()
 
 class Tracker:
     data = {}
@@ -127,16 +134,16 @@ class Tracker:
     @staticmethod
     def print_main_menu():
         print("=== Expense Tracker ===")
-        print("1) View accounts / balances  2) Select an account")
-        print("3) Create new account        4) Transfer between accounts")
-        print("5) View all transactions     6) Save & Exit")
+        type_print("1) View accounts / balances  2) Select an account")
+        type_print("3) Create new account        4) Transfer between accounts")
+        type_print("5) View all transactions     6) Save & Exit")
 
     def print_account_menu(self):
         print(f"=== Account: {self.name} | Balance: ${self.balance:.2f} ===")
-        print("1) View transactions    2) Add transaction")
-        print("3) Edit transaction     4) Delete transaction")
-        print("5) View by category     6) Set/update budget")
-        print("7) View budget          8) Back to main menu")
+        type_print("1) View transactions    2) Add transaction")
+        type_print("3) Edit transaction     4) Delete transaction")
+        type_print("5) View by category     6) Set/update budget")
+        type_print("7) View budget          8) Back to main menu")
 
 
 Tracker.load()
@@ -155,10 +162,10 @@ def print_trans(list):
 
 
 def print_categories():
-    print(
+    type_print(
         "\n1)Food/groceries.   2)Rent/housing.   3)Utilities.   4)Transportation.   5)Entertainment"
     )
-    print(
+    type_print(
         "6)Healthcare.   7)Shopping   8)Education.   9)Salary/income   10)Savings   11)Misc/other"
     )
 
@@ -318,18 +325,18 @@ while True:
                 break
     elif action == 3:
         print("Create new account: ")
-        name = input("Name: ")
+        name = input("Name: ").lower().strip()
         if name in Tracker.data:
             print("Account already exists, use a different name.")
             continue
         confirmation = input(
-            f"Are you sure that you would like to create an account named {name}?(y/n):"
+            f"Are you sure that you would like to create an account named {name.title()}?(y/n):"
         )
         if confirmation == "n":
             continue
         elif confirmation == "y":
             name = Tracker(name)
-            print("Account created succesfully.")
+            type_print("Account created succesfully.")
             Tracker.save()
             Tracker.load()
             for name in Tracker.data.keys():
