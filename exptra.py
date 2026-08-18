@@ -9,6 +9,7 @@ def type_print(text, delay=0.01):
         time.sleep(delay)
     print()
 
+
 class Tracker:
     data = {}
 
@@ -168,7 +169,6 @@ def print_categories():
     type_print(
         "6)Healthcare.   7)Shopping   8)Education.   9)Salary/income   10)Savings   11)Misc/other"
     )
-
 
 
 while True:
@@ -340,7 +340,7 @@ while True:
             Tracker.save()
             Tracker.load()
             for name in Tracker.data.keys():
-             accounts[name] = Tracker(name)
+                accounts[name] = Tracker(name)
 
     elif action == 4:
         if len(accounts) <= 1:
@@ -348,10 +348,16 @@ while True:
             continue
         else:
             for i, ac in enumerate(Tracker.data, start=1):
-                print(f"{i}) {ac.title()}")
+                print(f"{i}) {ac.title()}     ${accounts[ac].balance}")
                 print()
             acc1 = input("Transfer from (enter account name): ").lower().strip()
+            if acc1 not in Tracker.data:
+                type_print("Invalid account!")
+                continue
             acc2 = input("Transfer to (enter account name): ").lower().strip()
+            if acc2 not in Tracker.data:
+                type_print("Invalid account!")
+                continue
             try:
                 date = input("Date of transaction(dd-mm-yyyy): ").strip()
                 datetime.strptime(date, "%d-%m-%Y")
