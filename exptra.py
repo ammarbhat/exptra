@@ -358,8 +358,8 @@ while True:
             except:
                 print("Invalid date format")
                 continue
-            amount = float(input("Enter the edited amount: "))
-            description = input("Enter the edited description: ")
+            amount = float(input("Enter the amount to be transferred: "))
+            description = input("Enter the description: ")
             try:
                 Tracker.account_transfer(
                     accounts[acc1], accounts[acc2], amount, date, description
